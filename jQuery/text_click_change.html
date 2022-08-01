@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>텍스트 제어하기</title>
+<style>
+  #greeting{margin: 50px}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  greeting = $("#greeting");
+
+  greeting.click(function(){
+    greeting.text('클릭 후 입니다.');
+  });
+});
+</script>
+</head>
+<body>
+  <div id = "greeting"> 클릭 전 입니다.
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>HTML 태그 제어하기</title>
+<style>
+  #box1{float: left; width: 300px; height: 100px; margin: 20px; background: skyblue}
+  #box2{clear: both; float: left; width: 300px; height: 100px; margin: 20px; background: yellowgreen}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  box1 = $("#box1");
+  box2 = $("#box2");
+
+  box1.click(function(){
+    box1.html("<img src = 'https://i.pinimg.com/236x/20/5a/e5/205ae5ee41c5748a543b80699e43d8b3.jpg' />");
+
+    //이미지 사이즈 조정
+    $("#box1 img").css("height", "100px");
+  });
+
+  box2.click(function(){
+    //새로운 변수를 만든 후 기존의 box2 안에 있는 내용을 대입
+    box2Content = box2.html();
+
+    //입력할 img 태그를 변수로 선언
+    //이때 꼭 주소는 ''이거 이용해서 입력해야 함. "" 안됨.
+    image = "<img src = 'https://i.pinimg.com/236x/20/5a/e5/205ae5ee41c5748a543b80699e43d8b3.jpg' />";
+
+    //변수 box2Content와 변수 image 입력
+    box2.html(box2Content + image);
+
+    //이미지 사이즈 조정
+    $("#box2 img").css("height", "100px");
+  });
+});
+</script>
+</head>
+<body>
+  <div id = "box1">
+    이 박스를 클릭하면 케어베어가 나타납니다.
+  </div>
+
+  <div id = "box2">
+    이 박스를 클릭하면 이미지가 나타납니다.
+  </div>
+</body>
+</html>

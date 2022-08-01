@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>반복문</title>
+<style>
+  .box{float: left; width: 90px; height: 90px; margin-left: 40px}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  for(var i = 0; i <= 9; i++) {
+    console.log(i + "번째 for문 작동");
+  }
+
+  //length()는 해당 엘리먼트가 몇 개인지 알려주는 기능
+  //즉 $(".box").length()의 값은 8. 8번 반복할것임.
+  for(var i = 1; i <= $(".box").length; i++) {
+    //"+i+"
+    $(".box:nth-child("+i+")").text(i + '번째 위치한 박스입니다.');
+    if(i == 3) {
+      $(".box:nth-child("+i+")").css("background", "skyblue");
+    }
+  }
+});
+</script>
+</head>
+<body>
+  <div class = "box">box</div>
+  <div class = "box">box</div>
+  <div class = "box">box</div>
+  <div class = "box">box</div>
+  <div class = "box">box</div>
+  <div class = "box">box</div>
+  <div class = "box">box</div>
+  <div class = "box">box</div>
+</body>
+</html>

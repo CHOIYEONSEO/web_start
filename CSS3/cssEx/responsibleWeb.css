@@ -1,0 +1,39 @@
+/* common source */
+html{font-size: 10px; min-width: 320px}
+header{width: 100%; background: skyblue; padding: 10px 0 10px 0; display: inline-block}
+header nav{_float: left}
+header nav ul{_float: left; width: 100%}
+header nav ul li{float: left; color: #fff; text-align: center}
+#content{width: 100%}
+#myVisual{width: 100%; background: url("https://www.prugio.com/asset/images/brand/bg/pr_background_img03.jpg");
+          background-size: cover; background-position: 0 50%}
+#myVisual section{width: 80%l margin: 0 auto; position: relative; top: 40%}
+#myVisual section p{float: left; width: 100%; text-align: center; color: #fff}
+#webIntro{clear: both; float: left; width: 100%; background: hotpink; padding: 50px 0 50px 0}
+.webIntroCenter{width: 90%; margin: 0 auto}
+.blah{float: left; width: 23%; height: 50px; border: 1px solid #fff; border-radius: 10px}
+.blah p{float: left; width: 100%; text-align: center; color: #fff; margin-top: 12px}
+
+footer{clear: both; float: left; width: 100%; border-bottom: 1px solid #000; padding: 20px 0 20px 0}
+footer h1{width: 100%; text-align: center; font-size: 2em}
+
+/* mobile web */
+@media screen and (min-width: 0px) and (max-width: 600px) {
+  #logo{float: left; width: 100%; font-size: 3em; color: #fff; text-align: center}
+  header nav{width: 100%}
+  header nav ul li{float: left; width: 16%; font-size: 1em}
+  #myVisual{height: 300px}
+  #myVisual section p{font-size: 2em}
+  .blah{clear: both; float: left; width: 100%; text-align: center}
+  .blah2{margin: 10px 0px}
+}
+
+/* pc web */
+@media screen and (min-width: 601px) {
+  #logo{font-size: 3em; color: #fff; margin-left: 5%; display: inline-block}
+  header nav{float: right; margin-top: 10px}
+  header nav ul li{width: 100px; font-size: 1.3em}
+  #myVisual{height: 400px}
+  #myVisual section p{font-size: 4em}
+  .blah2{margin: 0 14% 0}
+}

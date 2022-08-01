@@ -1,0 +1,127 @@
+/*common*/
+/*container는 모두 포함하는거*/
+#container{width: 80%; margin: 0 auto}
+/*center는 container에서 더이상 콘텐츠가 없습니다만 제외한거*/
+/*#ccc는 gray*/
+#center{float: left; width: 100%; border-left: 1px solid #ccc; border-right: 1px solid #ccc}
+#myWallPhoto{float: left; width: 100%; height: 400px}
+/*myProfilePhoto는 html코드에서 제일 처음 나오는 프로필 사진*/
+#myProfilePhoto{width: 200px; margin: 0 auto}
+/*음수 마진의 경우 (top, left)와 (bottom, right)가 적용되는 방식이 다른데,
+top, left는 음수 마진을 주면 그 방향으로 요소가 이동해서 그만큼이 가려지게되고,
+bottom, right는 음수 마진을 주면 요소가 그 방향으로 이동하는 것이 아니라 이 요소 다음에 오는 요소를 끌어들이게 됨.*/
+#myProfilePhoto img{float: left; width: 100%; margin-top: -40%}
+/*#000은 black*/
+/*rem은 최상위 태그의 font-size 속성값을 기준으로 설정. em은 부모 태그의 font-size 속성값을 기준으로 설정. 값 계산은 곱셈으로.*/
+#name{float: left; text-align: center; color: #000; font-size: 2em; padding: 1rem 0}
+.myButtonBox{float: right; border: 1px solid #ccc; padding: 0.5rem; margin: 20px 5px 5px 0}
+/*background: none은 디폴트 색상인 흰색 없애주는거.*/
+/*border: none은 외곽선 없애주는거겠지.*/
+.myButtonBox .photoSelectorBtn, #myProfilePhotoUploadBtn, #myCoverPhotoUploadBtn{background: none; border: none; text-align: center; cursor: pointer}
+/*#555는 dark gray*/
+.myButtonBox a{color: #555;}
+/*다른 photoBox의 우측 아래로 위치시키기*/
+.photoBox{clear: both; float: right; margin-top: 3px; border: 1px solid #E9C083} /*#E9C083는 밝은 베이지.*/
+.myButtonBox .photoSelectorBtn{width: 70%; height: 24px}
+#myProfilePhotoUploadBtn, #myCoverPhotoUploadBtn{float: right; height: 24px; padding: 0 2px 0 2px}
+
+/* display: none은 현재 꾸미려는 부분 외에는 우선 안 보이게 처리하기 위함 */
+/* _display: none은 다시 보이도록 처리. */
+#myContent{_display: none}
+
+#container{clear: both; width: 80%; margin: 30px auto 0}
+#writing{clear: both; float: left; width: 100%; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; margin-bottom: 10%}
+#writing .me img{float: left; width: 30px; margin: 1rem}
+#writing .me p{float: left; font-size: 1rem; margin: 1.2rem 0 0 0}
+
+#writing textarea{float: left; width: 98%; margin-left: 1%; height: 100px; border-radius: 0}
+
+/*#fff는 white*/
+#writing #inputBox{clear: both; float: right; width: 40px; height: 1.9rem; border: 1px solid #ccc; margin: 0.5rem 1%; color: #fff; background: #fff}
+/*#000은 black*/
+#writing #inputBox input{float: left; width: 100%; border: none; color: #000; background: none; margin-top: 8px}
+
+/*#ccc는 gray*/
+.reading{clear: both; float: left; width: 100%; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc}
+
+.reading .writerArea img{float: left; width: 30px; margin: 1rem}
+.reading .writingInfo{float: left}
+.reading .writingInfo p{clear: both; float: left; font-size: 1rem; margin-top: 12px}
+/*#bbb는 #ccc보다는 좀 어두운 gray*/
+.reading .writingDate{clear: both; float: left; margin: 0.3rem 0 0 0; font-size: 0.5rem; color: #bbb}
+
+.content{float: left; width: 96%; min-height: 48px; margin-left: 2%; border: 1px solid #ccc}
+
+.likeArea{clear: both; float: left; width: 100%; margin-top: 10px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc}
+.likeArea div{padding: 5px 0; text-align: center}
+.likeNum{clear: both; float: left; width: 100%; border-bottom: 1px solid #ccc}
+.likeBtn{float: left; width: 50%; border-right: 1px solid #ccc}
+.contentsID{float: left; width: 49%}
+
+.myCommentArea{float: left; width: 100%}
+.myCommentArea img{float: left; width: 25px; margin: 2px}
+.commentBox{clear: both; float: left; width: 98%; padding: 1%; font-size: 1.2em}
+
+.myCommentArea .inputBox{float: left; width: 100%; margin-top: 16px; border-top: 1px solid #ccc}
+/*#fff는 white*/
+.inputComment{float: left; width: 70%; height: 26px; margin-left: 10px; border: none; background: #fff}
+
+.myCommentArea .regCommentBox{float: right; width: 9%; height: 29px; border-left: 1px solid #ccc; background: #fff}
+.regComment{float: left; width: 100%; border: none; color: #000; background: none; margin-top: 8px}
+
+.commentPoster, .writtenComment{float: left; font-size: 1.2em}
+
+.commentBox .commentPoster{color: #E9C083; margin-right: 10px} /*#E9C083 밝은 베이지.*/
+
+.regCommentBox{float: right; width: 9%; height: 29px; border-left: 1px solid #ccc; background: #fff}
+.regCommentBtn{float: left; width: 100%; border: none; color: #000; background: none; margin-top: 8px; cursor: pointer}
+
+.inputBox{float: left; width: 100%; margin-top: 16px; border-top: 1px solid #ccc}
+.inputBox img{float: left; width: 25px; margin: 2px 2px 2px 11px}
+
+#noContents{clear: both; float: left; width: 100%; text-align: center; padding: 10px 0 10px 0; display: none}
+
+
+/* mobile base */
+@media screen and (min-width: 0px) and (max-width: 1199px) {
+  #name{width: 100%}
+}
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  #myProfilePhoto{width: 80px; max-height: 100px}
+  #myWallPhoto{height: 150px}
+}
+
+@media screen and (min-width: 375px) and (max-width: 399px) {
+  #myProfilePhoto{width: 80px; max-height: 100px}
+  #myWallPhoto{height: 170px}
+}
+
+@media screen and (min-width: 400px) and (max-width: 500px) {
+  #myProfilePhoto{width: 100px; max-height: 120px}
+  #myWallPhoto{height: 200px}
+}
+
+@media screen and (min-width: 501px) and (max-width: 700px) {
+  #myProfilePhoto{width: 150px; max-height: 170px}
+  #myWallPhoto{height: 300px}
+}
+
+@media screen and (min-width: 427px) and (max-width: 729px) {
+  .myButtonBox{clear: both}
+}
+
+@media screen and (min-width: 500px) {
+  .likeNum{clear: none; width: 33%; cursor: pointer; border: none}
+  .likeBtn{width: 33%; cursor: pointer; border-left: 1px solid #ccc; border-right: 1px solid #ccc}
+  .contentsID{width: 33%; cursor: pointer}
+}
+
+
+/* pc */
+@media screen and (min-width: 1200px) {
+  #myProfilePhoto{float: left; width: 200px; margin-left: 50px}
+  #myProfilePhoto img{float: left; width: 100%; margin-top: -40%; border: 5px dotted #E9C083}/*#E9C083는 밝은 베이지.*/
+  #name{float: left; color: #000; font-size: 2em; margin-left: 20px; margin-top: 3px}
+  #writing{margin-top: 20px}
+}

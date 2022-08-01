@@ -1,0 +1,106 @@
+/*container css 적용*/
+/*container 영역은 크게 #introSite와 #signup으로 나뉨.
+우선 #introSite 영역을 CSS로 꾸미기 위해 방해가 되는 #signup은 숨기자*/
+/*회원가입 폼=#signup을 꾸밀때는 #introSite내용은 보이지 않게 처리하고,
+회원가입 폼은 보이도록 #signup{_display: none}으로 바꿔주고 #introSite{display: none} 추가.*/
+/*선택자 클래스명은 .클래스명, 아이디는 #아이디*/
+#signup{display: none}
+#introSite{_display: none}
+
+
+/* common */
+/*#fcdcae는 베이지, #6d460c는 갈색*/
+#siteComment{border: 3px solid #6d460c; padding: 1rem; font-size: 2rem; color: #6d460c}
+/*회원가입 폼에 css 적용*/
+#signupCenter{margin: 0 auto}
+/*#ccc는 gray*/
+#signUpForm{float: left; width: 98%; margin: 40px 0 40px 0; padding-top: 1rem; border: 1px solid #ccc; border-radius: 10px}
+
+.row{clear: both; float: left; width: 100%; margin-bottom: 1.5em}
+.row label{float: left; width: 20%; padding-left: 5%; font-size: 1.3rem}
+.inputBox{float: left; width: 90%; background: #fff; margin-left: 1rem; border: 1px solid #ccc}
+.row input{float: left; width: 98%; font-size: 1.5rem; margin-left: 2%; background: #fff; border: none}
+.row .selectBox{float: left; width: 21%; border: 1px solid #ccc; background: #fff; margin-top: 3px}
+/*-webkit-appearance: none은 (for 사파리랑 크롬) 자체적으로 있는 버튼 모양을 없앰./
+/*-moz-appearance: none은 (for 파이어폭) 자체적으로 있는 버튼 모양을 없앰./
+/*./: 현재 폴더로 이동, ../: 한 단계 상위 폴더로 이동, /: 최상위 폴더로 이동*/
+.row .selectBox select{float: left; background: #fff url('../images/index/selectTagBg.png');
+                       border: none; -webkit-appearance: none; -moz-appearance: none; background-size: 10px;
+                       background-repeat: no-repeat; background-position: 90% 5px; width: 90%; margin-left: 5px; font-size: 1rem}
+
+#birthYear{font-size: 1rem}
+.selectBoxMargin{margin-left: 2%; margin-right: 2%}
+/*relative는 자신의 위치를 기준으로 이동시킴. 여기서는 top값만 적용되어 있으므로 top이 적용되기 전 위치를 기준으로 top이 적용된만큼 이동.*/
+/*class genderRow input은 라디오버튼의 값 선택하는 버튼임. 근데 밑에서*/
+.genderRow input{width: 15px; margin-left: 10%; position: relative; top: 4px}
+
+#genderLabel{clear: both; width: 80%; margin: 0 auto}
+#gMM{border-left: none}
+.genderRow label{float: left; width: 49%; border: 1px solid #ccc; text-align: center; padding-left: 0}
+/*clear: both까지만 하면 버튼이 여성남성칸 밑으로 생기고, float: none하면 여성남성칸 옆으로 이동함.
+width: 0px하면 버튼크기 조절하는거라서 0이니까 아예 작아져서 안보이고, visibility: hidden하면 버튼 width를 15px로 하고 hidden 적용하면 버튼 사라짐.
+그냥 처음부터 visibility: hidden하면 되지 다른 속성값을 넣어주는 이유는 이 속성은 안보이게만 해주는거라
+예를 들어 clear: both까지만 한 상태로 hidden 적용하면 여성남성칸 밑에 바로 가입하기 버튼이 안오고 빈 공간이 생긴다음 가임하기 버튼이 오게 되기 때문.*/
+.genderRow input{clear: both; float: none; width: 15px; visibility: hidden}
+
+#valueError{float: left; width: 100%; text-align: center; color: red; font-size: 2em}
+/*#fcdcae는 베이지, #6d460c는 갈색*/
+#siteComment{border: 3px solid #6d460c; padding: 1rem; font-size: 2rem; color: #6d460c}
+
+/*submitBox는 가입하기 버튼을 감싸는 파란색 외곽 조금 둥그런 네모*/
+.submitBox{clear: both; float: left; width: 25%; padding: 0.4rem; background: #6d460c; margin-left: 5%; border-radius: 10px}
+/*signUpSubmit는 가입하기 버튼임.*/
+/*background: none은 submitBox색이 skyblue인데 signUpSubmit의 디폴트 바탕색이 하얀색이라 없애주는거.
+ color: #fff는 가입하기 글씨 색./
+/*#fff는 white*/
+#signUpSubmit{float: left; background: none; color: #fff; width: 100%; text-align: center; font-size: 1rem}
+
+
+/* mobile base css source */
+@media screen and (min-width: 0px) and (max-width: 1199px) {
+  /*#fff는 white*/
+  body{background: #fff}
+  #signupCenter{width: 80%}
+  #introSite{clear: both; float: left; width: 100%}
+  /*#64cbf9은 skyblue, #6d460c는 갈색, siteComment는 내가 만드는\n 첫 웹서비스에\n 어서오세요.*/
+  #siteComment{margin: 10% auto; width: 65%; color: #6d460c}
+  /*margin: 10% auto 15% 이렇게 속성이 3개 있으면 위 양옆 아래를 의미하므로 위 여백 10%, 양옆으로는 중앙, 아래 여백 15%라는 의미.*/
+  #signUpBtn{margin: 10% auto 15%; width: 100px; height: 30px; background: #6d460c; text-align: center; padding-top: 1em; border-radius: 1rem}
+  #signUpBtn p{font-size: 1rem; color: #fff}
+
+  #goToLoginBtn{clear: both; width: 30%; height: 30px; padding: 0.4rem; margin: 0 auto 20px; background: #6d460c; cursor: pointer; text-align: center; border-radius: 10px}
+  #goToLoginBtn p{font-size: 1rem; color: #fff; position: relative; top: 5px}
+}
+
+
+/* desktop css source */
+@media screen and (min-width: 1200px) {
+  #loginForm{display: block}
+  /*container는 회원가입 폼.*/
+  /*background-size는 값을 픽셀로 설정할수도 있고, contain, cover 사용 가능.
+  contain은 배경 이미지가 잘리는 부분 없이 모두 표시하는 거고,
+  cover는 잘리는 부분이 있어도 꽉 차게 표시하는거.*/
+  #container{float: left; width: 100%; min-height: 100%; background: url("../images/index/bgImage.jpg");
+             background-size: cover}
+  /*siteComment는 내가 만드는\n 첫 웹서비스에\n 어서오세요 임.*/
+  /*rgb(255, 255, 255)는 white*/
+  #siteComment{margin: 2% auto 0; width: 210px; background: rgba(255, 255, 255, 0.5)}
+  /*introSite는 바로 위에 나온 siteComment와 모바일 버전 가입하기 버튼 포함한 섹션.*/
+  /*display는 요소를 어떻게 표시할지를 선택, visibility는 요소를 보일지 말지 결정하는 속성.
+  display: block은 요소를 block 요소처럼 표시함. 즉 요소 앞뒤로 줄바꿈 됨.*/
+  /*block 요소와 inline 요소가 있는데 block은 자동으로 앞뒤 줄바꿈이 되는것이고, inline은 줄바꿈이 되지 않는것.*/
+  #introSite{display: block}
+  /*display: none은 박스=공간이 사라지게함.*/
+  /*signUpBtn과 goToLoginBtn은 공간이 부족한 모바일버전에서만 쓰이는 버튼이기 때문에 없애는거.*/
+  #signUpBtn, #goToLoginBtn{display: none}
+  /*signup은 가입정보 입력하는거랑 가입하기 버튼 포함한 섹션*/
+  #signup{display: block; margin-top: 1%; margin-bottom: 5%}
+  /*signupCenter는 signup 섹션 바로 내부에 있는 div*/
+  #signupCenter{width: 50%}
+  #signUpForm{background: rgba(255, 255, 255, 0.8)}
+  /*inputBox는 이름, 이메일, 비밀번호 입력하는 div*/
+  .inputBox{height: 40px}
+  .row input{height: 40px}
+  .submitBox{width: 10%; padding: 0.2rem}
+}
+/* end of desktop css source */

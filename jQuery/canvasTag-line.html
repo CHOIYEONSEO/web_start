@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>canvas 태그 학습</title>
+<link rel = "stylesheet" href = "../CSS3/cssEx/cssReset.css" />
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(document).ready(function(){
+  var box = document.getElementById("box"); //box Id를 변수 box로 설정
+  var canvas = box.getContext("2d"); //2d로 그리기
+
+  //선 시작 위치 지정
+  canvas.moveTo(50, 50);
+
+  //선 끝 위치 지정
+  canvas.lineTo(300, 100);
+
+  //선 그리기
+  canvas.stroke();
+})
+</script>
+</head>
+<body>
+  <canvas id = "box" width: "500" height: "500">
+    현재의 웹브라우저에서는 canvas 태그를 지원하지 않습니다.
+  </canvas>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>반복문</title>
+<style>
+  .box{float: left; width: 90px; height: 90px}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  for(var i = 2; i <= 9; i++) {
+    console.log(i+"단 시작");
+
+    for(var s = 1; s <= 9; s++) {
+      console.log(i + " * " + s + " = " + i * s);
+    }
+  }
+
+  /* i랑 s global variable 인듯
+  console.log("i의 값은 " + i);
+  */
+});
+</script>
+</head>
+<body>
+</body>
+</html>

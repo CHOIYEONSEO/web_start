@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>table 태그 활용</title>
+</head>
+<body>
+  <section>
+    <h1>가로셀 병합 colspan 활용</h1>
+      <table width = "200" bgcolor = "skyblue" cellpadding = "1">
+        <tr align = "center" bgcolor = "white">
+          <td colspan = "3">3칸 병합
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr align = "center" bgcolor = "white">
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+      </table>
+  </section>
+
+  <section>
+    <h1>세로셀 병합 rowspan 활용</h1>
+      <table width = "200" bgcolor = "skyblue" cellpadding = "1"> <!--cellpadding은 셀 안의 내용과 여백 지정-->
+        <tr align = "center" bgcolor = "white" height = "30">
+          <td rowspan = "3" width = "30%">
+            3줄 병합
+          </td>
+          <td>1</td>
+        </tr>
+        <tr align = "center" bgcolor = "white" height = "30">
+          <td>2</td>
+        </tr>
+        <tr align = "center" bgcolor = "white" height = "50">
+          <td>3</td>
+        </tr>
+        <tr align = "center" bgcolor = "white" height = "30">
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+  </section>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>연산자 사용하기</title>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  a = 20;
+  b = 10;
+  c = 40;
+
+  result = a + b;
+  console.log('더하기 '+result);
+
+  result = a - b;
+  console.log("빼기 " + result);
+
+  result = a * b;
+  console.log("곱하기 "+ result);
+
+  result = a / b;
+  console.log("나누기 " + result);
+
+  result = a % b;
+  console.log("나누기의 나머지 "+result);
+
+  result = a + b * c;
+  console.log("괄호를 이용하지 않은 계산 결과" + result);
+
+  result = (a + b) * c;
+  console.log("괄호를 이용한 계산 결과 " + result);
+});
+</script>
+</head>
+<body>
+</body>
+</html>

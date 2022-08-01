@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>배경에 투명도 조절하기</title>
+<style>
+.notOpacity{width: 100%; height: 100px; background: skyblue}
+.opacity{width: 100%; height: 100px; background: skyblue; position: relative; top: 30px; opacity: 0.5}
+.notAlpha{width: 100%; height: 100px; position: relative; top: 60px; background: rgb(227, 180, 191)}
+.alpha{width: 100%; height: 100px; position: relative; top: 90px; background: rgba(227, 180, 191, 0.5)}
+</style>
+</head>
+<body>
+  <div class = "notOpacity">
+    Hello world!
+    투명도를 지정하지 않은 영역
+  </div>
+
+  <div class = "opacity">
+    Hello world!
+    투명도를 지정한 영역 <!--이렇게하면 영역 안에 있는 텍스트까지 투명도가 적용됨.-->
+  </div>
+
+  <div class = "notAlpha">
+    Hello world!
+    투명도를 지정하지 않은 영역
+  </div>
+
+  <div class = "alpha">
+    Hello world!
+    alpha 값을 이용하여 투명도를 지정한 영역
+    <!--이렇게 rgba를 이용해서 alpha값에 투명도를 주게 되면 배경에만 투명도가 적용됨.-->
+  </div>
+</body>
+</html>

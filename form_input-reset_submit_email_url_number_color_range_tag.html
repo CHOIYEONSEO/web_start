@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>form, input 태그 활용</title>
+</head>
+<body>
+  <h1>input 태그의 type이 reset</h1>
+    <p>입력폼에 값을 입력하고 [다시 입력] 버튼을 누르세요.</p>
+    <form name = "signUp" method = "post" action = "signup.php">
+      아이디<input type = "text" name = "userId" value = "" />
+      <input type = "reset" value = "다시 입력" />
+    </form>
+
+  <h1>input 태그의 type이 submit</h1>
+    <form name = "signUp" method = "post" action = "signup.php">
+      <input type = "text" name = "userId" value = "myid" />
+      <input type = "submit" value = "완료" />
+    </form>
+
+  <h1>input 태그의 type이 email</h1>
+    <form name = "signUp" method = "post" action = "signup.php">
+      email: <input type = "email" />
+      <input type = "submit" value = "submit" />
+    </form>
+
+  <h1>input 태그의 type이 url</h1>
+  <form name = "signUp" method = "post" action = "signup.php">
+    <input type = "url" />
+    <input type = "submit" value = "submit" />
+  </form>
+
+  <h1>input 태그의 type이 number</h1>
+  <form name = "signUp" method = "post" action = "signup.php">
+    <input type = "number" pattern = "\d*" />
+    <input type = "submit" value = "submit" />
+  </form>
+
+  <h1>input 태그의 type이 color</h1>
+  <form name = "signUp" method = "post" action = "signup.php">
+    <input type = "color" />
+  </form>
+
+  <h1>input 태그의 type이 range</h1>
+  <form name = "signUp" method = "post" action = "signup.php">
+    <input type = "range" min = "0" max = "100" value = "50" step = "10" />
+    <input type = "range" min = "50" max = "100" value = "50" step = "25" />
+  </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>rem과 em의 차이</title>
+<link rel = "stylesheet" href = "./cssEx/cssReset.css" />
+<style>
+  html{font-size: 10px}
+  .parent{font-size: 3rem}
+  .child{font-size: 2em}
+  .child2{font-size: 2rem}
+</style>
+</head>
+<body>
+  <p>I am nothing [10px]</p>
+  <div class = "parent">
+    I am parent [3rem]
+    <p class = "child">I am child [2em]</p>
+    <p class = "child2">I am child2 [2rem]</p>
+  </div>
+</body>
+</html>

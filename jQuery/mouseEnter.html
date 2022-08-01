@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>마우스오버 이벤트 만들기</title>
+<link rel = "stylesheet" href = "../CSS3/cssEx/cssReset.css" />
+<style>
+#greeting{float: left; width: 300px; height: 100px; margin: 50px; background: skyblue}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  $("#greeting").mouseenter(function(){
+    alert("Hello World");
+  });
+});
+</script>
+</head>
+<body>
+  <div id = "greeting">
+    마우스 포인터를 여기에 올리세요.
+  </div>
+</body>
+</html>

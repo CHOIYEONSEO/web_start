@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>값 제어하기</title>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  nameList = $("#nameList");
+  btn = $("#btn");
+
+  btn.click(function(){
+    nameList.val("김민후");
+  });
+});
+</script>
+</head>
+<body>
+  <select id = "nameList">
+    <option value = "김민후">김민후</option>
+    <!--selected = 첫 화면에 선택되어 있을 옵션 -->
+    <option value = "김혜윤" selected>김혜윤</option>
+    <option value = "김태영">김태영</option>
+    <option value = "김미우">김미우</option>
+    <option value = "김유나">김유나</option>
+  </select>
+  <input type = "button" id = "btn" value = "이름변경" />
+</body>
+</html>

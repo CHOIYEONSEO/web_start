@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>엘리먼트 서서히 숨기기</title>
+<link rel = "stylesheet" href = "../CSS3/cssEx/cssReset.css" />
+<style>
+  div{float: left; width: 200px; height: 50px; padding: 20px; background: skyblue}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  $("#fadeOut").fadeOut();
+  $("#fadeOut5000").fadeOut(5000);
+});
+</script>
+</head>
+<body>
+  <div id = "fadeOut">
+    fadeOut() 적용
+  </div>
+
+  <div id = "fadeOut5000">
+    fadeOut(5000) 적용
+  </div>
+</body>
+</html>

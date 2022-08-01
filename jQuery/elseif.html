@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>조건문-else if</title>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  var num1 = 200; //global var
+  console.log("num1 is " + num1);
+
+  var num2 = 300; //glocal var
+  console.log("num2 is " + num2);
+
+  if(num1 == num2) {
+    console.log("num1과 num2가 같습니다.");
+  }else if(num1 <= num2) {
+    console.log("num1이 num2보다 작습니다.");
+  }else {
+    console.log("num1은 num2와 같지도 작지도 않습니다.");
+  }
+});
+</script>
+</head>
+<body>
+</body>
+</html>

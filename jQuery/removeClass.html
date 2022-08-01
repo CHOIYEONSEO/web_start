@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>클래스 삭제하기</title>
+<style>
+  .hello{float: left; width: 200px; height: 100px; background: skyblue}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  world = $(".world");
+
+  world.click(function(){
+    world.removeClass("hello");
+  });
+});
+</script>
+</head>
+<body>
+  <div class = "hello world">여기를 클릭하면 hello 클래스가 삭제 됩니다.</div>
+</body>
+</html>

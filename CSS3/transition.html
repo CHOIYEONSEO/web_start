@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>transition 효과 적용</title>
+<link rel = "stylesheet" href = "./cssEx/cssReset.css" />
+<style>
+ .box{width: 100px; height: 100px; margin: 50px 100px; background: skyblue}
+ .rotateX{transform: rotateX(0deg); transition: all 10s linear}
+ .rotateX:hover{transform: rotateX(360deg)}
+ .rotateY{transform: rotateY(0deg); transition: transform 10s linear}
+ .rotateY:hover{transform: rotateY(360deg)}
+
+ .myBox{width: 100px; height: 100px; background: hotpink; transition: width 2s ease, background 4s linear}
+ .myBox:hover{width: 200px; height: 200px; background: skyblue}
+</style>
+</head>
+<body>
+  <div class = "box rotateX">rotateX</div>
+  <div class = "box rotateY">rotateY</div>
+
+  <div class = "myBox">everdevel</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>this 사용하기</title>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  hello = $('.hello');
+
+  //클래스로 클릭 이벤트를 걸어 박스값을 모두 변하게 하는 방법.
+  /*
+  hello.click(function(){
+    hello.text("헬로우 월드");
+  });
+  */
+
+  //this를 이용해서 박스 중 클릭한 박스만 값을 변하게 하는 방법.
+  //즉, 4번째꺼 클릭하고 2번째꺼 클릭하면 총 두개만 값이 바뀜.
+  hello.click(function(){
+    $(this).text("헬로우 월드");
+  })
+});
+</script>
+</head>
+<body>
+  <div class = "hello">Hello world!</div>
+  <div class = "hello">Hello world!</div>
+  <div class = "hello">Hello world!</div>
+  <div class = "hello">Hello world!</div>
+  <div class = "hello">Hello world!</div>
+  <div class = "hello">Hello world!</div>
+</body>
+</html>

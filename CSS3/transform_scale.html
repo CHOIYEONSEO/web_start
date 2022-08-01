@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>크기변경</title>
+<link rel = "stylesheet" href = "./cssEx/cssReset.css" />
+<style>
+  .box{float: left; width: 100px; height: 100px; margin: 50px; background: yellow}
+  .transform2{transform: scale(2)}
+  .baseBox{transform: scale(1)}
+  .transformHalf{transform: scale(0.5)}
+  .transformEach{transform: scale(0.5, 2)}
+</style>
+</head>
+<body>
+  <div class = "transform2 box">scale값 2 적용</div>
+  <div class = "baseBox box">scale값 1 적용</div>
+  <div class = "transformHalf box">scale값 0.5 적용</div>
+  <div class = "transformEach box">scale값 0.5와 2 적용</div>
+</body>
+</html>

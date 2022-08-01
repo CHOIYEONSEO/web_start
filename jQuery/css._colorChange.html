@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>제이쿼리로 CSS 컨트롤</title>
+<link rel = "stylesheet" href = "../CSS3/cssEx/cssReset.css" />
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  $("#colorChange").click(function(){
+    $("#colorChange").css('color', 'skyblue');
+  });
+});
+</script>
+</head>
+<body>
+  <div id = "colorChange">
+    저를 클릭하면 글씨 색이 변합니다.
+  </div>
+</body>
+</html>

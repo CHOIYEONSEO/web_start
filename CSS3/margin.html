@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>박스의 바깥 여백 지정</title>
+<style>
+  div{width: 150px; height: 150px}
+  .targetBox1{float: left; background: skyblue; margin: 30px}
+  .box1{float: left; background: hotpink}
+  .box2{clear: both; float: left; background: yellow}
+  .targetBox2{clear: both; float: left; background: skyblue; margin: 10px 130px}
+  .box3{float: left; background: hotpink}
+  .box4{clear: both; float: left; background: yellow}
+  .targetBox3{clear: both; float: left; background: skyblue; margin: 10px 130px 200px}
+  .box5{float: left; background: hotpink}
+  .box6{clear: both; float: left; background: yellow}
+  .targetBox4{clear: both; float: left; background: skyblue; margin: 50px 180px 10px 40px}
+  .box7{float: left; background: hotpink}
+  .box8{clear: both; float: left; background: yellow}
+</style>
+</head>
+<body>
+  <div class = "targetBox1">target box</div>
+  <div class = "box1">side box</div>
+  <div class = "box2">bottom box</div>
+
+  <div class = "targetBox2">target box</div>
+  <div class = "box3">side box</div>
+  <div class = "box4">bottom box</div>
+
+  <div class = "targetBox3">target box</div>
+  <div class = "box5">side box</div>
+  <div class = "box6">bottom box</div>
+
+  <div class = "targetBox4">target box</div>
+  <div class = "box7">side box</div>
+  <!--<div class = "box7" style = "margin-right: 200px;">side box</div>-->
+  <div class = "box8">bottom box</div>
+</body>
+</html>

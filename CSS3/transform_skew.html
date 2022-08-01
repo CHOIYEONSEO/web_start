@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>기울기 변경</title>
+<link rel = "stylesheet" href = "./cssEx/cssReset.css" />
+<style>
+  .box{width: 100px; height: 100px; margin: 50px 100px; background: yellow}
+  .skew_x{transform: skew(50deg, 0deg)}
+  .skew_y{transform: skew(0deg, 50deg)}
+  .skew_xy{transform: skew(20deg, 20deg)}
+</style>
+</head>
+<body>
+  <div class = "box skew_x">기울기를 가로만 적용</div>
+  <div class = "box skew_y">기울기를 세로만 적용</div>
+  <div class = "box skew_xy">기울기를 가로 세로 모두 적용</div>
+</body>
+</html>

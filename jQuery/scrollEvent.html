@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>반복문</title>
+<style>
+  body{height: 5000px}
+  #box1{float: left; width: 100px; height: 100px; position: fixed; background: skyblue; display: none}
+</style>
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+  $(window).scroll(function(){
+    var nowScrollVar = $(this).scrollTop();
+    console.log("스크롤 이벤트 작동 스크롤 값: " + nowScrollVar);
+
+    if(nowScrollVar >= 1000 && nowScrollVar <= 1100) {
+      $("#box1").show();
+    } else if(nowScrollVar <= 999){
+      $("#box1").hide();
+    } //이 else if문 없으면 스크롤 내려서 box1 나타났다가
+      //다시 스크롤 충분히 올렸을때 box1이 사라지지 않고 계속 남아있음.
+  });
+});
+</script>
+</head>
+<body>
+  <div id = "box1"></div>
+</body>
+</html>

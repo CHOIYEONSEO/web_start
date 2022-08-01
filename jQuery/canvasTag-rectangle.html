@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>canvas 태그 학습</title>
+<link rel = "stylesheet" href = "../CSS3/cssEx/cssReset.css" />
+<script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
+<script>
+$(document).ready(function(){
+  var box = document.getElementById("box");
+  var canvas = box.getContext("2d");
+
+  //하늘색으로 색 채우기
+  canvas.fillStyle = "skyblue";
+  //사각형 만들기
+  canvas.fillRect(10, 10, 120, 120);
+});
+</script>
+</head>
+<body>
+  <canvas id = "box" width = "500" height = "500">
+    현재의 웹브라우저에서는 canvas 태그를 지원하지 않습니다.
+  </canvas>
+</body>
+</html>

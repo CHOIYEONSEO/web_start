@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title>미디어쿼리 사용하기</title>
+<link rel = "stylesheet" href = "./cssEx/cssReset.css" />
+<style>
+  li{width: 100px;}
+  @media screen and (min-width: 0px) and (max-width: 500px) {
+    li{clear: both; float: left}
+  }
+  @media screen and (min-width: 501px) {
+    li{float: left}
+  }
+</style>
+</head>
+<body>
+  <ul>
+    <li>HTML5</li>
+    <li>CSS3</li>
+    <li>jQuery</li>
+    <li>MySQL</li>
+    <li>PHP</li>
+  </ul>
+</body>
+</html>
