@@ -1,6 +1,8 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/common/session.php';
-class comments{
+include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/log/memberLog.php';
+
+class comments extends memberLog{
   //데이터베이스 접속 정보를 대입할 프라퍼티
   protected $dbConnection = null;
   //mode
@@ -62,7 +64,18 @@ class comments{
     $result = false;
     if($res){
       //나중에 댓글 등록 로그 남김
-
+      //memberLog에 전달할 로그 정보를 배열로 전달
+      $myLog = array();
+      //로그 번호
+      $myLog['logNum'] = 6;
+      //로그 생성 시간
+      $myLog['regTime'] = $time;
+      //댓글을 등록한 게시물 번호
+      $myLog['contentsID'] = $contentsID;
+      //댓글 내용
+      $myLog['comment'] = $comment;
+      //로그 정보 전달
+      $this->writeMemberLog($myLog);
 
 
       $result = true;

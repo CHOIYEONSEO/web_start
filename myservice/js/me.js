@@ -135,21 +135,46 @@ $(document).ready(function() {
               inputHtml += "</div></div>";
               inputHtml += "<span class = 'content'>" + bbs + "</span>";
               inputHtml += "<div class = 'likeArea'>";
-              inputHtml += "<div class = 'likeNum likes"+ 861225 +"' style = 'background : #fff'> 공감 수: "+ 250 + "</div>";
 
-              inputHtml += "<div class = 'likeBtn' id = 'likes"+ 861225 +"'>공감" + '하기' + "</div>";
-              inputHtml += "<div class = 'contentsID'> 콘텐츠번호: "+ 861225 +"</div>";
+              //myLike 값이 1이면 공감한 게시물이므로 배경색 변경
+              inputHtml += "<div class = 'likeNum likes"+ content[contents]['contentsID'] +"' style = 'background :" + ((content[contents]['myLike'] == 1) ? '#f9d1e4' : '#fff') + "'> 공감 수 : "+ content[contents]['myLike'] + "</div>";
+
+              //자신이 공감한 게시물에는 '취소'문구를, 공감하지 않은 게시물에는 '하기'문구를 selectLike 변수에 대입
+              var selectLike = ((content[contents]['myLike'] == 1) ? '취소' : '하기');
+
+              //selectLike 값 표시
+              inputHtml += "<div class = 'likeBtn' id = 'likes"+ content[contents]['contentsID'] +"'>공감" + selectLike + "</div>";
+              inputHtml += "<div class = 'contentsID'> 콘텐츠번호: "+ content[contents]['contentsID'] +"</div>";
               inputHtml += "</div>";
 
-              //댓글 영역 나중에 프로그래밍 필요
-              inputHtml += "<div class = 'myCommentArea myCommentArea"+ 861225 +"'>";
 
-              inputHtml += "<div class = 'commentBox'>";
-              inputHtml += "<img src = './images/me/cupCake.jpg' />";
-              inputHtml += "<p class = 'commentRegTime'>2030년 12월 25일</p>";
-              inputHtml += "<p class = 'commentPoster'>최연서</p>";
-              inputHtml += "<p class = 'writtenComment'>정말 반갑습니다. </p>";
-              inputHtml += "</div>";
+              //댓글 영역 프로그래밍 시작
+              inputHtml += "<div class = 'myCommentArea myCommentArea"+ content[contents]['contentsID'] +"'>";
+
+              //댓글 정보를 변수에 대입
+              var comments = content[contents]['comment'];
+
+              for(var comment in comments){
+                inputHtml += "<div class = 'commentBox'>";
+                inputHtml += "<img src = '" + comments[comment]['profilePhoto'] + "' />";
+
+                //타임스탬프 시간을 사람이 이해할 수 있는 시간으로 변경
+                var d = new Date(content[contents]['regTime'] * 1000);
+                //getMonth()는 0부터 시작하므로 1을 더해야 함 11월은 10으로 보여주므로 +1
+                var month = d.getMonth() + 1;
+                //시간 만들기
+                var regTime = d.getFullYear() + '년 ' + month + '월 ' + d.getDate() + '일 ' + d.getHours() + '시 ' + d.getMinutes() + '분';
+
+                //사용자가 내용에 태그 입력 시를 대비해서 특수기호를 HTML 코드로 변경
+                bbs2 = comments[comment]['comment'];
+                bbs2 = bbs2.replace(/</g, '&lt;');
+                bbs2 = bbs2.replace(/>/g, '&gt;');
+
+                inputHtml += "<p class = 'commentRegTime'>" + regTime + "</p>";
+                inputHtml += "<p class = 'commentPoster'>" + comments[comment]['userName'] + "</p>";
+                inputHtml += "<p class = 'writtenComment'>" + bbs2 + "</p>";
+                inputHtml += "</div>";
+              }
               //댓글 영역 끝
 
               inputHtml += "</div>";
@@ -244,4 +269,48 @@ $(document).ready(function() {
   });
 
   //공감하기, 공감 취소 기능 구현
+  $(document).on('click', '.likeBtn', function(){
+    //likesID 변수는 AJAX 통신 이후 결과 처리를 위해 사용
+    likesID = $(this).attr('id');
+
+    //likes 클래스에 mode의 값과 공감할 콘텐츠 번호 전송
+    $.ajax({
+      type: 'post', //post 전송방식으로 전달
+      dataType: 'json', //json 언어로 전달
+      url: './database/likes.php',
+      data: {mode: 'save', contentsID: $(this).attr('id')}, //전달할 데이터
+      async: false, //값을 전달 받은 후 실행
+
+      success: function(data){
+        console.log('likes - return data is ' + JSON.stringify(data));
+        //공감하기 결과에 따른 프로그래밍 필요
+        if(data.result == true){
+          //게시물의 공감 수를 최신 정보로 갱신
+          $('.' + likesID).text('공감 수 : ' + data.count);
+
+          //게시물에 공감했을 때 버튼 내용 변경 및 배경색 변경
+          if(data.myLike == true){
+            //공감 수 영역 배경색 변경
+            $('.' + likesID).css('background', '#f9d1e4');
+            //공감 버튼 내용을 공감취소로 변경
+            $('#' + likesID).text('공감취소');
+          }
+          //게시물에 공감 취소했을 때 버튼 내용 변경과 배경색 변경
+          else{
+            //공감 수 영역 배경색 흰색으로 변경
+            $('.' + likesID).css('background', '#fff');
+            //공감하기 버튼 내용을 공감하기로 변경
+            $('#' + likesID).text('공감하기');
+          }
+        }
+
+
+      },
+      error: function(request, status, error){
+        console.log('request ' + request);
+        console.log('status ' + status);
+        console.log('error ' + error);
+      }
+    });
+  });
 });

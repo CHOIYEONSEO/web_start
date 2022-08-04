@@ -1,3 +1,15 @@
+<?php
+  include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/common/session.php';
+  //로그인하지 않은 상태에서 url로 접근하려할시 차단하도록 하는 코드.
+  if(!isset($_SESSION['myMemberSes'])){
+    header("Location:./index.php");
+    exit;
+  }
+
+  include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/database/contents.php';
+  $ourContents = $contents->contentsLoad('all');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +27,16 @@
   <script type = "text/javascript" src = "./js/all.js"></script>
 </head>
 <body>
-  <!-- 나중에 header 넣을 자리 -->
+  <!-- header 자리 -->
+  <?php
+    include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/include/header.php';
+  ?>
   <div id = "timeLine">
     <div id = "container">
       <div id = "writing">
         <div class = "me">
-          <img src = "./images/me/cupCake.jpg" />
-          <p>최연서</p>
+          <img src = "<?=$_SESSION['myMemberSes']['profilePhoto']?>" />
+          <p><?=$_SESSION['myMemberSes']['userName']?></p>
         </div>
 
         <textarea maxlength = "500" id = "meContent"></textarea>
@@ -29,41 +44,52 @@
           <input type = "button" id = "mePostBtn" value = "게시" />
         </div>
       </div>
+<?php
+  foreach($ourContents as $oc) {
+?>
       <div class = "reading">
         <div class = "writerArea">
-          <img src = "./images/me/cupCake.jpg" />
+          <img src = "<?=$oc['profilePhoto']?>" />
           <div class = "writingInfo">
-            <p>최연서</p>
-            <div class = "writingDate">2030년 12월 25일</div>
+            <p><?=$oc['userName']?></p>
+            <div class = "writingDate"><?=date('Y년 m월 d일 H시 i분', $oc['regTime'])?></div>
           </div>
         </div>
 
-        <span class = "content">반갑습니다.</span>
+        <span class = "content"><?=htmlspecialchars($oc['content'])?></span>
 
         <div class = "likeArea">
-          <!--#fff는 white-->
-          <div class = "likeNum likes861225" style = "background: #fff">공감 수: 250</div>
-          <div class = "likeBtn" id = "likes861225">공감하기</div>
-          <div class = "contentsID">콘텐츠 번호: 861225</div>
+          <!--#fff는 white, #E9C083는 밝은 베이지.-->
+          <div class = "likeNum likes<?=$oc['contentsID']?>" style = "background: <?=(($oc['myLike'] == 1) ? '#E9C083' : '#fff')?>">공감 수: <?=$oc['likesCount']?></div>
+          <div class = "likeBtn" id = "likes<?=$oc['contentsID']?>">공감<?=(($oc['myLike'] == 1) ? '취소' : '하기')?></div>
+          <div class = "contentsID">콘텐츠 번호: <?=$oc['contentsID']?></div>
         </div>
 
-        <div class = "myCommentArea myCommentArea861225">
+        <div class = "myCommentArea myCommentArea<?=$oc['contentsID']?>">
+<?php
+  foreach($oc['comment'] as $comment) {
+?>
           <div class = "commentBox">
-            <img src = "./images/me/cupCake.jpg" />
-            <p class = "commentRegTime">2030년 12월 25일</p>
-            <p class = "commentPoster">최연서</p>
-            <p class = "writtenComment">반갑습니다.</p>
+            <img src = "<?=$comment['profilePhoto']?>" />
+            <p class = "commentRegTime"><?=date('Y년 m월 d일 H시 i분', $comment['regTime'])?></p>
+            <p class = "commentPoster"><?=$comment['userName']?></p>
+            <p class = "writtenComment"><?=htmlspecialchars($comment['comment'])?></p>
           </div>
+<?php
+  }
+?>
         </div>
-
         <div class = "inputBox">
-          <img src = "./images/me/cupCake.jpg" />
-          <input type = "text" class = "inputComment comments861225" placeholder = "코멘트 입력" />
+          <img src = "<?=$_SESSION['myMemberSes']['profilePhoto']?>" />
+          <input type = "text" class = "inputComment comments<?=$oc['contentsID']?>" placeholder = "코멘트 입력" />
           <div class = "regCommentBox">
-            <input type = "button" class = "regCommentBtn" id = "comments861225" value = "게시" />
+            <input type = "button" class = "regCommentBtn" id = "comments<?=$oc['contentsID']?>" value = "게시" />
           </div>
         </div>
       </div>
+<?php
+  }
+?>
     </div>
 
     <div id = "noContents">
@@ -75,6 +101,9 @@
   <aside id = "advertiseBox">
     Advertisement
   </aside>
-  <!-- 나중에 footer 넣을 자리 -->
+  <!-- footer 자리 -->
+  <?php
+    include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/include/footer.php';
+  ?>
 </body>
 </html>

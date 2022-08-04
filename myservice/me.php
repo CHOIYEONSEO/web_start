@@ -1,5 +1,10 @@
 <?php
   include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/common/session.php';
+  //로그인하지 않은 상태에서 url로 접근하려할시 차단하도록 하는 코드.
+  if(!isset($_SESSION['myMemberSes'])){
+    header("Location:./index.php");
+    exit;
+  }
   include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/database/contents.php';
 
   $myContents = $contents->contentsLoad('me');
@@ -40,7 +45,7 @@
       <p id = "name"><?=$_SESSION['myMemberSes']['userName']?></p>
       <div class = "myButtonBox">
         <!--a 태그의 download 속성: href에 지정된 파일을 다운로드해주는 기능.-->
-        <a href = "./log/memberLogs/myLog_1111.txt" download>나의 로그 다운로드</a>
+        <a href = "./log/memberLogs/myLog_<?=$_SESSION['myMemberSes']['myMemberID']?>.txt" download>나의 로그 다운로드</a>
       </div>
       <div class = "myButtonBox">
         <!--form 태그의 enctype 속성: form 데이터가 서버로 제출될 때 해당 데이터가 인코딩되는 방법.
@@ -83,8 +88,8 @@
         <!-- timeline -->
         <div id = "writing">
           <div class = "me">
-            <img src = "./images/me/cupCake.jpg" />
-            <p>최연서</p>
+            <img src = "<?=$_SESSION['myMemberSes']['profilePhoto']?>" />
+            <p><?=$_SESSION['myMemberSes']['userName']?></p>
           </div>
           <!--textarea는 여러 줄의 문자를 입력할 수 있는 양식.-->
           <!--textarea 태그의 maxlength 속성: textarea 요소 영역에 입력할 수 있는 최대 문자수.-->
@@ -114,18 +119,23 @@
 
           <div class = "likeArea">
             <!--이렇게 html 코드에 style 속성 넣어주면 inline 방식으로 태그에 직접 CSS 적용한거.-->
-            <div class = "likeNum likes<?=$mc['contentsID']?>" style = "background: #fff">공감 수: 250</div>
+            <div class = "likeNum likes<?=$mc['contentsID']?>" style = "background: <?=(($mc['myLike'] == 1)? '#f9d1e4' : '#fff')?>">공감 수 : <?=$mc['likesCount']?></div>
             <div class = "likeBtn" id = "likes<?=$mc['contentsID']?>">공감하기</div>
             <div class = "contentsID">콘텐츠 번호: <?=$mc['contentsID']?></div>
           </div>
 
           <div class = "myCommentArea myCommentArea<?=$mc['contentsID']?>">
-            <div class = "commentBox">
-              <img src = "./images/me/cupCake.jpg" />
-              <p class = "commentRegTime">2022년 12월 25일</p>
-              <p class = "commentPoster">최연서</p>
-              <p class = "writtenComment">정말 반갑습니다. </p>
-            </div>
+          <?php
+            foreach($mc['comment'] as $comment) { ?>
+              <div class = "commentBox">
+                <img src = "<?=$comment['profilePhoto']?>" />
+                <p class = "commentRegTime"><?=date('Y년 m월 d일 H시 i분', $comment['regTime'])?></p>
+                <p class = "commentPoster"><?=$comment['userName']?></p>
+                <p class = "writtenComment"><?=nl2br(htmlspecialchars($comment['comment']))?></p>
+              </div>
+          <?php
+            }
+          ?>
           </div>
 
           <div class = "inputBox">

@@ -1,3 +1,12 @@
+<?php
+//로그인한 상태에서 index.php 파일로 접근하지 못하도록 하는 코드.
+  include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/common/session.php';
+  if(isset($_SESSION['myMeberSes'])){
+    header("Location:./me.php");
+    exit;
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +16,13 @@
 <meta name = "viewport" content = "width = device-width" />
 <meta charset = "utf-8" /> <!--언어 설정-->
 <title>My First Web Service</title>
-<link rel = "stylesheet" href = "./css/cssReset.css" />
-<link rel = "stylesheet" href = "./css/header.css" />
-<link rel = "stylesheet" href = "./css/index.css" />
-<link rel = "stylesheet" href = "./css/footer.css" />
+<link rel = "stylesheet" href = "./css/cssReset.css?cssVer=1.0" />
+<link rel = "stylesheet" href = "./css/header.css?cssVer=1.0" />
+<link rel = "stylesheet" href = "./css/index.css?cssVer=1.5" />
+<link rel = "stylesheet" href = "./css/footer.css?cssVer=1.0" />
 <script type = "text/javascript" src = "./js/jquery-3.1.0.min.js"></script>
-<script type = "text/javascript" src = "./js/index.js"></script>
-<script type = "text/javascript" src = "./js/valueCheck.js"></script>
+<script type = "text/javascript" src = "./js/index.js?jsVer=1.0"></script>
+<script type = "text/javascript" src = "./js/valueCheck.js?jsVer=2.4"></script>
 </head>
 <body>
   <!--삭제한부분에 header inlcude하기-->

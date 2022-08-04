@@ -1,7 +1,8 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/common/session.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/log/memberLog.php';
 
-class contents{
+class contents extends memberLog{
   //데이터베이스 접속 정보를 대입할 프라퍼티
   protected $dbConnection = null;
   //mode
@@ -55,6 +56,16 @@ class contents{
     if($res){
       //나중에 게시물 등록 로그 남김
       $result = true;
+      //memberLog에 전달할 로그 정보를 배열로 전달
+      $myLog = array();
+      //로그 번호
+      $myLog['logNum'] = 4;
+      //게시물 등록 시간
+      $myLog['regTime'] = $time;
+      //게시물 내용
+      $myLog['contents'] = $content;
+      //로그 정보 전달
+      $this->writeMemberLog($myLog);
     }
 
     //요청한 AJAX에 전달
@@ -88,7 +99,10 @@ class contents{
     //join문을 사용하는 이유는 게시물 작성자의 이름 정보와 프로필 사진 정보를 가져오기 위함.
     //limit이 있는 이유는 최초 등록된 20개의 게시물만 출력하기 위함
     //첫번째 게시물이 먼저 나오게하려면 책과 다르게 asc(오름차순)으로 써야됨. 책에서는 내림차순=desc 로 적어놨음. 근데 desc로 하면 25번째 게시물이 먼저 나옴.
-    $sql = "select c.contentsID, c.myMemberID, c.content, c.regTime, m.userName, m.profilePhoto from contents c join mymember m on (c.myMemberID = m.myMemberID) {$sqlMaker} order by c.regTime asc limit 20";
+    $sql = "select c.contentsID, c.myMemberID, c.content, c.regTime, m.userName, m.profilePhoto,
+            (select count(*) from likes l where l.contentsID = c.contentsID) as likesCount,
+            (select count(*) from likes l where l.contentsID = c.contentsID and l.myMemberID = {$myMemberID}) as myLike
+            from contents c join mymember m on (c.myMemberID = m.myMemberID) {$sqlMaker} order by c.regTime asc limit 20";
 
     $this->dbConnection();
     $res = $this->dbConnection->query($sql);
@@ -98,6 +112,16 @@ class contents{
     //하나씩 불러온 데이터를 array_push를 이용하여 배열 $content에 데이터를 하나씩 추가
     while($row = $res->fetch_array(MYSQLI_ASSOC)) {
       //나중에 이곳에 댓글 불러오기 기능 구현
+      //댓글을 반환하는 메소드를 호출함, 아규먼트로 게시물 번호 전달
+      $commentLoad = $this->commentLoad($row['contentsID']);
+
+      //게시물의 댓글을 담는 배열을 생성, 댓글은 여러 개일 수 있으므로 배열로 생성
+      $row['comment'] = array();
+
+      //댓글을 $row['comment']에 저장
+      while ($comments = $commentLoad->fetch_array(MYSQLI_ASSOC)) {
+        array_push($row['comment'], $comments);
+      }
 
       array_push($content, $row);
     }
@@ -152,7 +176,10 @@ class contents{
 
     //limit이 있는 이유는 최초 등록된 20개의 게시물만 출력하기 위함
     //첫번째 게시물이 먼저 나오게하려면 책과 다르게 asc(오름차순)으로 써야됨. 책에서는 내림차순=desc 로 적어놨음. 근데 desc로 하면 25번째 게시물이 먼저 나옴.
-    $sql = "SELECT c.contentsID, c.myMemberID, c.content, c.regTime, m.userName, m.profilePhoto FROM contents c JOIN mymember m ON (c.myMemberID = m.myMemberID) {$sqlMaker} ORDER BY c.regTime ASC LIMIT {$limitFirstValue}, {$dataCount}";
+    $sql = "SELECT c.contentsID, c.myMemberID, c.content, c.regTime, m.userName, m.profilePhoto,
+            (select count(*) from likes l where l.contentsID = c.contentsID) as likesCount,
+            (select count(*) from likes l where l.contentsID = c.contentsID and l.myMemberID = {$myMemberID}) as myLike
+            FROM contents c JOIN mymember m ON (c.myMemberID = m.myMemberID) {$sqlMaker} ORDER BY c.regTime ASC LIMIT {$limitFirstValue}, {$dataCount}";
     $this->dbConnection();
     $res = $this->dbConnection->query($sql);
 
@@ -162,6 +189,18 @@ class contents{
     //하나씩 불러온 데이터를 array_push를 이용하여 $content에 데이터를 하나씩 추가
     while($row = $res->fetch_array(MYSQLI_ASSOC)) {
       //나중에 이곳에 댓글 불러오기 기능 구현
+      //댓글을 반환하는 메소드 호출 아규먼트로 게시물 번호 전달
+      $commentLoad = $this->commentLoad($row['contentsID']);
+
+      //게시물의 댓글을 담는 배열 생성, 댓글은 여러 개일 수 있으므로 배열로 생성
+      $row['comment'] = array();
+
+      //댓글을 $row['comment']에 저장
+      while ($comments = $commentLoad->fetch_array(MYSQLI_ASSOC)){
+        array_push($row['comment'], $comments);
+      }
+
+
 
       array_push($content, $row);
     }
@@ -172,6 +211,16 @@ class contents{
       'content' => $content
     ));
   }
+
+  function commentLoad($contentsID){
+    $sql = "select c.contentsID, c.commentsID, c.comment, c.regTime, m.userName, m.profilePhoto from comments c ";
+    $sql .= "inner join mymember m on (c.myMemberID = m.myMemberID) where contentsID = {$contentsID}";
+    $this->dbConnection();
+    $res = $this->dbConnection->query($sql);
+    return $res;
+  }
+
+
 }
 $contents = new contents;
 

@@ -1,7 +1,8 @@
 <?php
   include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/common/session.php';
+  include_once $_SERVER['DOCUMENT_ROOT'].'/myservice/log/memberLog.php';
 
-  class myMember{
+  class myMember extends memberLog{
     //데이터베이스 접속 정보를 대입할 프라퍼티
     protected $dbConnection = null;
 
@@ -185,7 +186,18 @@
 
       //쿼리 질의 성공 시
       if($res){
-        //나중에 이곳에 회원가입 로그 만듦
+        //회원가입 로그
+        //memberLog에 전달한 로그 정보를 배열로 전달
+        $myLog = array();
+        //로그번호
+        $myLog['logNum'] = 1;
+        //회원가입 시간
+        $myLog['regTime'] = $regTime;
+        //회원번호
+        $myLog['myMemberID'] = $this->dbConnection->insert_id;
+        //로그 정보 전달
+        $this->writeMemberLog($myLog);
+
 
 
         //회원가입에 성공했으므로 세션 생성
@@ -241,6 +253,140 @@
 
     //포토 업로드 메소드
     function photoSave(){
+      //업로드할 포토가 프로필 사진인지 커버 사진인지를 대입
+      $uploadPhotoType = '';
+
+      //업로드할 포토의 구분에 따라 달라지는 폴더명을 대입
+      $uploadPhotoFolder = '';
+
+      //프로필 포토 업로드인지 확인
+      if(isset($_FILES['myProfilePhoto'])){
+        $uploadPhotoType = 'myProfilePhoto';
+        $uploadPhotoFolder = 'myMemberProfilePhoto';
+      }
+
+      //커버 포토 업로드인지 확인
+      else if(isset($_FILES['myCoverPhoto'])){
+        $uploadPhotoType = 'myCoverPhoto';
+        $uploadPhotoFolder = 'myMeberCoverPhoto';
+      }
+
+      //업로드 된 임시 파일 대입
+      $myTempFile = $_FILES[$uploadPhotoType]['tmp_name'];
+
+      //파일 타입 및 확장자 구하기
+      $fileTypeExtension = explode("/", $_FILES[$uploadPhotoType]['type']);
+
+      //파일 타입
+      $fileType = $fileTypeExtension[0];
+
+      //파일 확장자
+      $extension = $fileTypeExtension[1];
+
+      //이미지 파일이 맞는지 확인
+      if($fileType != 'image'){
+        echo "<script>alert('이미지 파일만 가능');location.href = '../me.php';</script>";
+        exit;
+      }
+
+      //허용하는 확장자가 맞는지 확인
+      //허용할 확장자를 jpg, bmp, gif, png로 정하고, 그외는 업로드 불가
+      if($extension != 'jpg' && $extension != 'jpeg' && $extension != 'bmp' && $extension != 'gif' && $extension != 'png') {
+        echo "<script>alert('jpg, jpeg, bmp, gif, png 파일만 업로드 가능');location.href = '../me.php';</script>";
+        exit;
+      }
+
+      //저장할 파일명을 생성 ex) $uploadPhotoFolder861225.jpg
+      $makingFileName = $uploadPhotoFolder.$_SESSION['myMemberSes']['myMemberID']."."."{$extension}";
+
+      //이미지 파일을 저장할 실제 폴더명과 파일명 정보 생성
+      $myFile = "../images/".$uploadPhotoFolder."/{$makingFileName}";
+
+      //이미지 파일을 저장할 폴더 정보를 대입
+      $dir = "../images/".$uploadPhotoFolder."/";
+
+      //이미지 파일을 저장할 폴더가 있는지 확인하고 없으면 생성
+      if(!is_dir($dir)){
+        //폴더가 존재하지 않으므로 폴더 생성
+        mkdir($dir, 0777);
+      }
+
+      //폴더 존재 여부 확인
+      $isDir = is_dir($dir);
+
+      //폴더 없을 때 처리
+      if($isDir == false) {
+        echo "<script>alert('이미지를 저장할 폴더가 없습니다. error - 3'); location.href = '../me.php';</script>";
+        exit;
+      }
+
+      //폴더 열기
+      $opendir = opendir($dir);
+
+      //폴더 열기 실패 시 처리
+      if($opendir == false) {
+        echo "<script>alert('이미지를 저장할 폴더를 열수 없습니다. error - 4');location.href = '../me.php';</script>";
+        exit;
+      }
+
+      //임시 저장된 파일을 저장할 폴더로 옮김
+      $imageUpload = move_uploaded_file($myTempFile, $myFile);
+
+      //임시 저장된 파일을 저장할 폴더로 옮기기 실패 시 처리
+      if($imageUpload == false) {
+        echo "<script>alert('사진 업로드 중 오류가 발생했습니다. error - 5');location.href = '../me.php';</script>";
+        exit;
+      }
+
+      //이미지가 해당 폴더에 업로드 성공하면 데이터베이스에 해당 이미지 정보를 mymember 테이블에 넣음
+      //mymember 테이블에 넣을 정보 생성
+      $imageFilePath = '/myservice/images/'.$uploadPhotoFolder.'/'.$makingFileName;
+
+      //위에서 생성한 정보를 데이터베이스에 입력
+
+      //필드를 대입할 변수 초기화
+      $photoField= '';
+      //커버, 프로필 사진 구분에 따른 테이블의 필드 지정
+      if($uploadPhotoType == 'myProfilePhoto'){
+        $photoField = 'profilePhoto';
+      } else if($uploadPhotoType == 'myCoverPhoto'){
+        $photoField = 'coverPhoto';
+      }
+
+      $this->dbConnection();
+      $filePath = $this->dbConnection->real_escape_string($imageFilePath);
+
+      //사진 정보 업데이트할 회원 번호
+      $myMemberID = $_SESSION['myMemberSes']['myMemberID'];
+
+      //이미 있는 레코드에 포토 정보를 적용하므로 update문 사용
+      $sql = "update mymember set {$photoField} = '{$filePath}' where myMemberID = {$myMemberID}";
+      $res = $this->dbConnection->query($sql);
+
+      //쿼리문 질의 성공 시
+      if($res) {
+        //사진 업로드 로그
+        //memberLog에 전달할 로그 정보를 배열로 전달
+        $myLog = array();
+        //로그 번호
+        $myLog['logNum'] = 3;
+        //포토 등록 시간
+        $myLog['regTime'] = time();
+        //프로필 포토인지 커버 포토인지 구분
+        $myLog['photoType'] = $uploadPhotoType;
+        //로그 정보 전달
+        $this->writeMemberLog($myLog);
+
+        //유저 세션 이미지 정보 변경
+        $_SESSION['myMemberSes'][$photoField] = $filePath;
+
+        //나의 페이지로 이동
+        header("Location:../me.php");
+      } else{
+        echo "<script>alert('사진 업로드 중 오류가 발생했습니다. error - 6');location.href = '../me.php';</script>";
+        exit;
+      }
+
 
     }
   }
