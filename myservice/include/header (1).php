@@ -1,6 +1,6 @@
 <?php
   //id가 viewType인 영역은 세션이 존재하며, me.php 페이지와 all.php 파일에서만 표시
-  if(strpos($_SERVER['REQUEST_URI'], 'me.php') || strpos($_SERVER['REQUEST_URI'], 'all.php')) {
+  if(strpos($_SERVER['REQUEST_URI'], 'me.php') || strpos($_SERVER['REQUEST_UTI'], 'all.php')) {
 ?>
 <div id = "viewType">
   <a href = '/myservice/me.php' id = 'meLink'>me</a>

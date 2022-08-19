@@ -1,0 +1,32 @@
+/* 클래스: . | 아이디: # | margin: 바깥 여백 | padding: 안쪽 여백 */
+
+/* common */
+header{clear: both; float: left; width: 100%; position: fixed} /* position: fixed하면 스크롤해도 해당위치에 고정됨. */
+.logoAirbnb{float: left}
+
+/* mobile */
+@media screen and (min-width:0px) and (max-width:743px){
+  .logoAirbnb{display: none}
+
+}
+
+/* PC */
+@media screen and (min-width:744px) and (max-width:949px){
+  #textLogo{display: none}
+  .search{float: left}
+}
+
+@media screen and (min-width:950px) and (max-width:1127px){
+  #textLogo{display: none}
+  /* 중간 정렬 */
+  .search{margin: auto}
+}
+
+@media screen and (min-width:1128px) and (max-width:1605px){
+  
+
+}
+
+@media screen and (min-width:1606px){
+
+}

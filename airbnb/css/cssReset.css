@@ -1,0 +1,14 @@
+@charset "utf-8";
+/*margin : 바깥 여백 padding : 안쪽 여백*/
+body, header, footer, p, h1, h2, h3, h4, h5, h6, ul, ol, li, form, label, input, textarea, button, select{margin: 0; padding: 0; font-family: verdana, arial; font-size: 10px}
+/*min-width: 최소 길이. 근데 앞서서는 애니메이션 만들때 최소 길이와 최대 길이를 썼는데 여기서는 그냥 덩그러니 최소 길이만 지정.? => 320px보다 화면이 작아지지 않는다는 건가?*/
+body{min-width: 320px}
+/*border: 박스에 외곽선 적용.*/
+img{border: 0}
+ul, ol{list-style: none}
+/*font-style: normal-기본, oblique-기울임, itlic-이탤릭, inherit-부모 엘리먼트의 font-style 값*/
+em, address{font-style: normal}
+/*text-decoration: 텍스트에 줄긋기. overline-윗줄, underline-밑줄, line-through-가운뎃줄, underline overline-윗줄과 밑줄, none-라인 없음.*/
+a{text-decoration: none}
+/*like .myMenu:nth-child(2)*/
+a:hover, a:active, a:focus{text-decoration: none}
